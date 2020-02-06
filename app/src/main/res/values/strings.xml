@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Bug Tracking App</string>
+    <string name="action_bugReport">Bug Reports</string>
+    <string name="action_bugTrackingForm">Bug Tracking Form</string>
+    <string name="importanceNumber">4</string>
+</resources>
