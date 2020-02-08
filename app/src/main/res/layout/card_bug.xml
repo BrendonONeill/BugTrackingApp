@@ -45,5 +45,23 @@
             android:text="@string/importanceNumber"
             android:textSize="24sp" />
 
+        <ImageButton
+            android:id="@+id/bugEdit"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/bugFormTitle"
+            android:layout_marginTop="22dp"
+            android:src="@android:drawable/ic_menu_edit" />
+
+        <ImageButton
+            android:id="@+id/bugDelete"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/bugFormTitle"
+            android:layout_marginTop="22dp"
+            android:layout_toEndOf="@+id/bugEdit"
+            android:src="@android:drawable/ic_menu_delete" />
+
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

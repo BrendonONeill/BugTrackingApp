@@ -28,11 +28,20 @@ class BugTrackingMemStore : BugTrackingStore {
     }
 
     override fun update(bugTracking: BugTrackingModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        var foundBug: BugTrackingModel? = bugTrackings.find { p -> p.id == bugTracking.id }
+        if (foundBug != null) {
+            foundBug.title = bugTracking.title
+
+            foundBug.bugimportance= bugTracking.bugimportance
+
+
+            logAll()
+        }
     }
 
     override fun delete(bugTracking: BugTrackingModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        bugTrackings.remove(bugTracking)
+        logAll()
     }
 
     fun logAll() {
