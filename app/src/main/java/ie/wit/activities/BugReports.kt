@@ -7,11 +7,16 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.Adapters.BugTrackingAdapter
+import ie.wit.Adapters.DeleteListener
+import ie.wit.Adapters.EditListener
 import ie.wit.R
 import ie.wit.main.BugTrackingApp
+import ie.wit.models.BugTrackingModel
 import kotlinx.android.synthetic.main.activity_bug_reports.*
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivityForResult
 
-class BugReports : AppCompatActivity() {
+class BugReports : AppCompatActivity(), EditListener, DeleteListener {
     lateinit var app: BugTrackingApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +25,17 @@ class BugReports : AppCompatActivity() {
 
         app = this.application as BugTrackingApp
         recyclerView.setLayoutManager(LinearLayoutManager(this))
-        recyclerView.adapter = BugTrackingAdapter(app.bugTrackingsStore.findAll())
+        recyclerView.adapter = BugTrackingAdapter(app.bugs.findAll(),this,this)
+        loadBugTrackings()
+    }
+
+    private fun loadBugTrackings() {
+        showBugTracking(app.bugs.findAll())
+    }
+
+    fun showBugTracking (bugs: List<BugTrackingModel>) {
+        recyclerView.adapter = BugTrackingAdapter(bugs, this, this)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -29,15 +44,35 @@ class BugReports : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_bugForms -> { startActivity(Intent(this, BugTrackingActivity::class.java))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.item_add -> startActivityForResult<BugTrackingActivity>(0)
+
+           
         }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+
+
+
+    override fun onEditClick(bugTracking: BugTrackingModel) {
+        startActivityForResult(intentFor<BugTrackingActivity>().putExtra("edit", bugTracking), 0)
+
+    }
+
+    override fun onDeleteClick(bugTracking: BugTrackingModel) {
+        app.bugs.delete(bugTracking.copy())
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        loadBugTrackings()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

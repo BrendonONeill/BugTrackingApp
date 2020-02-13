@@ -8,7 +8,17 @@ import ie.wit.R
 import ie.wit.models.BugTrackingModel
 import kotlinx.android.synthetic.main.card_bug.view.*
 
-class BugTrackingAdapter constructor(private var bugTrackings: List<BugTrackingModel>)
+
+interface EditListener {
+    fun onEditClick(bugTracking: BugTrackingModel)
+}
+interface DeleteListener {
+    fun onDeleteClick(bugTracking: BugTrackingModel)
+}
+
+
+class BugTrackingAdapter constructor(private var bugTrackings: List<BugTrackingModel>,private val elistener: EditListener,
+                                     private val dlistener: DeleteListener)
     : RecyclerView.Adapter<BugTrackingAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -23,17 +33,25 @@ class BugTrackingAdapter constructor(private var bugTrackings: List<BugTrackingM
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val bugTracking = bugTrackings[holder.adapterPosition]
-        holder.bind(bugTracking)
+        holder.bind(bugTracking, elistener, dlistener)
     }
 
     override fun getItemCount(): Int = bugTrackings.size
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(bugTracking: BugTrackingModel) {
+        fun bind(
+            bugTracking: BugTrackingModel, elistener: EditListener,
+            dlistener: DeleteListener
+        ) {
             itemView.bugFormTitle.text = bugTracking.title
+            itemView.bugDescription.text = bugTracking.descriptions
             itemView.bugFormNumber.text = bugTracking.bugimportance
             itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+            itemView.bugEdit.setOnClickListener { elistener.onEditClick(bugTracking) }
+            itemView.bugDelete.setOnClickListener {
+                (dlistener.onDeleteClick(bugTracking))
+            }
         }
     }
 }

@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="275dp"
         android:padding="16dp">
 
         <ImageView
@@ -20,7 +20,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="16dp"
-            app:srcCompat="@mipmap/ic_launcher_round"/>
+            app:srcCompat="@mipmap/ic_launcher_round" />
 
         <TextView
             android:id="@+id/bugFormTitle"
@@ -44,6 +44,35 @@
             android:layout_toEndOf="@+id/bugFormTitle"
             android:text="@string/importanceNumber"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/bugDescription"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/bugFormTitle"
+
+            android:layout_marginTop="82dp"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+        <ImageButton
+            android:id="@+id/bugEdit"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/bugFormTitle"
+            android:layout_marginTop="148dp"
+            android:src="@android:drawable/ic_menu_edit" />
+
+        <ImageButton
+            android:id="@+id/bugDelete"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/bugFormTitle"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="149dp"
+            android:layout_toEndOf="@+id/bugEdit"
+            android:src="@android:drawable/ic_menu_delete" />
+
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

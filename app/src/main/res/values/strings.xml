@@ -3,4 +3,6 @@
     <string name="action_bugReport">Bug Reports</string>
     <string name="action_bugTrackingForm">Bug Tracking Form</string>
     <string name="importanceNumber">4</string>
+    <string name="menu_addBug"></string>
+    <string name="save_bug"> Save Bug </string>
 </resources>

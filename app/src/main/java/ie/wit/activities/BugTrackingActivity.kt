@@ -1,7 +1,7 @@
 package ie.wit.activities
 
 import android.content.Intent
-import android.icu.text.CaseMap
+
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -15,40 +15,50 @@ import ie.wit.models.BugTrackingModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.card_bug.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main.view.*
 
 class BugTrackingActivity : AppCompatActivity() {
+
+    var bug = BugTrackingModel()
+    var edit = false
     lateinit var app: BugTrackingApp
-
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
 
         app = this.application as BugTrackingApp
 
 
+
+
+
+        if (intent.hasExtra("edit")) {
+            edit = true
+            bug = intent.extras?.getParcelable<BugTrackingModel>("edit")!!
+            titlebug.setText(bug.title)
+            DescriptionBox.setText(bug.descriptions)
+
+
+            saveButton.setText(R.string.save_bug)
+        }
+
         saveButton.setOnClickListener {
 
             val title = titlebug.text.toString()
+            val description = DescriptionBox.text.toString()
 
-            val bugNumber = if(BugRadio.checkedRadioButtonId == R.id.Bug1) "1" else "5"
+            val bugNumber = if (BugRadio.checkedRadioButtonId == R.id.Bug1) "1"
+            else if (BugRadio.checkedRadioButtonId == R.id.Bug2) "2"
+            else if (BugRadio.checkedRadioButtonId == R.id.Bug3) "3"
+            else if (BugRadio.checkedRadioButtonId == R.id.Bug4) "4"
+            else if (BugRadio.checkedRadioButtonId == R.id.Bug5) "5" else "0"
 
-
-
-            app.bugTrackingsStore.create(BugTrackingModel(title = title , bugimportance = bugNumber))
-
-
+            app.bugs.create(BugTrackingModel(title = title, descriptions = description, bugimportance = bugNumber))
+            setResult(AppCompatActivity.RESULT_OK)
+            finish()
 
         }
     }
@@ -72,5 +82,5 @@ class BugTrackingActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-        }
+}
 
