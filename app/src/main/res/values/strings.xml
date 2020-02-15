@@ -3,4 +3,24 @@
     <string name="action_bugReport">Bug Reports</string>
     <string name="action_bugTrackingForm">Bug Tracking Form</string>
     <string name="importanceNumber">4</string>
+
+    <string name="menu_bugForm">Bug Form</string>
+    <string name="menu_bugReport">Bug Reports</string>
+    <string name="menu_favourites">Favourites</string>
+    <string name="menu_about">About Us</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Brendon O Neill</string>
+    <string name="nav_header_subtitle">MobileApp@hotmail.co.uk</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="aboutus_message">Hi, I\'m Homer\n\nPlease vote for me.\n\n Please Please Please Please!!</string>
+
+
 </resources>
