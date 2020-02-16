@@ -70,7 +70,7 @@ class Home : AppCompatActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.action_bugForms-> toast("You Selected Donate")
+            R.id.action_bugForms-> toast("You Selected Forms")
             R.id.action_bugReport -> toast("You Selected Report")
         }
         return super.onOptionsItemSelected(item)

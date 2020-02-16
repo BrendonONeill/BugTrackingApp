@@ -10,7 +10,7 @@
         android:id="@+id/imageView3"
         android:layout_width="182dp"
         android:layout_height="257dp"
-        android:src="@drawable/brendon"
+        android:src="@drawable/brendon1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
